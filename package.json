@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "version": "0.0.0",
+  "devDependencies": {
+    "elm-tooling": "^1.8.0"
+  },
+  "scripts": {}
+}
