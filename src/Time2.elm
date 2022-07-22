@@ -4,6 +4,7 @@ module Time2 exposing
     , decoderOfZone
     , encodeZone
     , epoch
+    , toStandardZone
     , utc
     )
 
@@ -37,6 +38,31 @@ customZone name eras offsetOfEarliestEra =
         , eras = eras
         , offsetOfEarliestEra = offsetOfEarliestEra
         }
+
+
+{-|
+
+    import Time
+
+    start : Int
+    start =
+        61
+
+    zone : Time.Zone
+    zone =
+        customZone "" [ { start = start, offset = 120 } ] 0
+            |> toStandardZone
+
+    Time.millisToPosix (start * 60 * 1000)
+        |> Time.toHour zone
+    --> 3 -- This will be 1 once https://github.com/elm/time/issues/7 is fixed, we then need to fix our implementation
+
+-}
+toStandardZone : Zone -> Time.Zone
+toStandardZone (Zone { eras, offsetOfEarliestEra }) =
+    eras
+        |> List.map (\{ start, offset } -> Era (start - 1) offset)
+        |> Time.customZone offsetOfEarliestEra
 
 
 {-| Both `start` and `offset` of an era are minutes from `epoch`.
