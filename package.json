@@ -2,7 +2,9 @@
   "private": true,
   "version": "0.0.0",
   "devDependencies": {
-    "elm-tooling": "^1.8.0"
+    "elm-test": "0.19.1-revision9",
+    "elm-tooling": "^1.8.0",
+    "elm-verify-examples": "^5.2.0"
   },
   "scripts": {}
 }
