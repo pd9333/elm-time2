@@ -1,5 +1,7 @@
 # Time2
 
+Yet another package to work with time that observes daylight saving time.
+
 ## Allow sending time zone through wire
 
 We introduce this package because we want to transfer time zone back and forth between client and server.
@@ -9,4 +11,4 @@ to `Time.Zone` at the very last step. We feel it would be convenient for us if w
 
 ## Observe daylight saving time
 
-This package also tries to observes daylight saving time, especially the `toParts` and `fromParts` functions.
+This package also tries to observes daylight saving time, see `toParts` and `fromParts`.

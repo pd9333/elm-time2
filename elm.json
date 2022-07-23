@@ -1,7 +1,7 @@
 {
     "type": "package",
     "name": "pd9333/elm-time2",
-    "summary": "Yet another package to work with time",
+    "summary": "Yet another package to work with time that observes daylight saving time",
     "license": "BSD-3-Clause",
     "version": "1.0.0",
     "exposed-modules": [
