@@ -154,7 +154,7 @@ decoderOfZone =
 -}
 utc : Zone
 utc =
-    customZone "UTC" [] 0
+    customZone "Etc/UTC" [] 0
 
 
 
