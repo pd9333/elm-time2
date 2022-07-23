@@ -11,4 +11,6 @@ to `Time.Zone` at the very last step. We feel it would be convenient for us if w
 
 ## Observe daylight saving time
 
-This package also tries to observes daylight saving time, see `toParts` and `fromParts`.
+This package also tries to observes daylight saving time, see
+[`Time2.toParts`](https://package.elm-lang.org/packages/pd9333/elm-time2/latest/Time2#toParts) and
+[`Time2.fromParts`](https://package.elm-lang.org/packages/pd9333/elm-time2/latest/Time2#fromParts).
