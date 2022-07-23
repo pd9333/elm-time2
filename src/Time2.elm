@@ -212,26 +212,13 @@ toParts zone time =
 
 
 {-| Set year of [`Parts`](#Parts).
-
-Year lower than `1970` will be treated as `1970`.
-
-    epoch
-        |> toParts utc
-        |> withYear 1969
-        |> fromParts utc
-    --> epoch
-
 -}
 withYear : Int -> Parts -> Parts
 withYear year (Parts parts) =
-    let
-        fixedYear =
-            max 1970 year
-    in
     Parts
         { parts
-            | year = fixedYear
-            , day = min parts.day (daysInMonth fixedYear parts.month)
+            | year = year
+            , day = min parts.day (daysInMonth year parts.month)
         }
 
 
