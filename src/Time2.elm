@@ -1,7 +1,7 @@
 module Time2 exposing
     ( epoch
     , Parts, toParts, fromParts, withYear, withMonth, withDay, withHour, withMinute, withSecond, withMillis
-    , Zone, getName, customZone, toStandardZone, utc, encodeZone, decoderOfZone
+    , Zone, getZoneName, customZone, toStandardZone, utc, encodeZone, decoderOfZone
     )
 
 {-| This package allows us to transfer time zone through the wire easily and tries to observe daylight saving time.
@@ -19,7 +19,7 @@ module Time2 exposing
 
 # Time Zones
 
-@docs Zone, getName, customZone, toStandardZone, utc, encodeZone, decoderOfZone
+@docs Zone, getZoneName, customZone, toStandardZone, utc, encodeZone, decoderOfZone
 
 -}
 
@@ -56,12 +56,12 @@ type Zone
 
 {-| Get the name of a zone.
 
-    getName utc
+    getZoneName utc
     --> "Etc/UTC"
 
 -}
-getName : Zone -> String
-getName (Zone { name }) =
+getZoneName : Zone -> String
+getZoneName (Zone { name }) =
     name
 
 
