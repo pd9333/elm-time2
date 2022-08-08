@@ -91,6 +91,8 @@ toStandardZone =
 
 {-| This function converts [`Time2.Zone`](#Zone) to [`Time.Zone`][elmTimeZone].
 
+It subtracts 1 from the starting point of each era and then convert that to [`Time.Zone`](elmTimeZone).
+
 [elmTimeZone]: /packages/elm/time/latest/Time#Zone
 
     import Time
@@ -106,7 +108,7 @@ toStandardZone =
 
     Time.millisToPosix (start * 60 * 1000)
         |> Time.toHour zone
-    --> 3 -- This will be 1 once https://github.com/elm/time/issues/7 is fixed, we then need to fix our implementation
+    --> 3 -- When this becomes 1, we need to avoid subtracting 1 from the start of each era.
 
 -}
 toElmTimeZone : Zone -> Time.Zone
