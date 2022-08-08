@@ -1,7 +1,8 @@
 module Time2 exposing
     ( epoch
     , Parts, toParts, fromParts, withYear, withMonth, withDay, withHour, withMinute, withSecond, withMillis
-    , Zone, getZoneName, customZone, toStandardZone, utc, encodeZone, decoderOfZone
+    , Zone, getZoneName, customZone, utc, encodeZone, decoderOfZone
+    , toElmTimeZone, toStandardZone
     )
 
 {-| This package allows us to transfer time zone through the wire easily and tries to observe daylight saving time.
@@ -19,7 +20,12 @@ module Time2 exposing
 
 # Time Zones
 
-@docs Zone, getZoneName, customZone, toStandardZone, utc, encodeZone, decoderOfZone
+@docs Zone, getZoneName, customZone, utc, encodeZone, decoderOfZone
+
+
+## compatibility with `elm/time`
+
+@docs toElmTimeZone, toStandardZone
 
 -}
 
@@ -76,9 +82,16 @@ customZone name eras offsetOfEarliestEra =
         }
 
 
-{-| This function converts [`Time2.Zone`](#Zone) to [`Time.Zone`][standardZone].
+{-| Deprecated, please use [`toElmTimeZone`](#toElmTimeZone) as that name is less misleading.
+-}
+toStandardZone : Zone -> Time.Zone
+toStandardZone =
+    toElmTimeZone
 
-[standardZone]: /packages/elm/time/latest/Time#Zone
+
+{-| This function converts [`Time2.Zone`](#Zone) to [`Time.Zone`][elmTimeZone].
+
+[elmTimeZone]: /packages/elm/time/latest/Time#Zone
 
     import Time
 
@@ -89,15 +102,15 @@ customZone name eras offsetOfEarliestEra =
     zone : Time.Zone
     zone =
         customZone "" [ { start = start, offset = 120 } ] 0
-            |> toStandardZone
+            |> toElmTimeZone
 
     Time.millisToPosix (start * 60 * 1000)
         |> Time.toHour zone
     --> 3 -- This will be 1 once https://github.com/elm/time/issues/7 is fixed, we then need to fix our implementation
 
 -}
-toStandardZone : Zone -> Time.Zone
-toStandardZone (Zone { eras, offsetOfEarliestEra }) =
+toElmTimeZone : Zone -> Time.Zone
+toElmTimeZone (Zone { eras, offsetOfEarliestEra }) =
     eras
         |> List.map (\{ start, offset } -> Era (start - 1) offset)
         |> Time.customZone offsetOfEarliestEra
